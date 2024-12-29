@@ -1,45 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New Year Countdown</title>
-    <style>
-        body { 
-            font-family: Arial, sans-serif; 
-            text-align: center; 
-            background: #282c34; 
-            color: white; 
-        }
-        .countdown {
-            font-size: 3em;
-            margin-top: 20%;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Year Countdown</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background: linear-gradient(to right, #2c3e50, #3498db);
+      color: #fff;
+    }
+
+    .countdown-container {
+      text-align: center;
+    }
+
+    #countdown {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 20px;
+    }
+
+    #countdown div {
+      font-size: 24px;
+    }
+
+    #countdown span {
+      font-size: 48px;
+      font-weight: bold;
+      background: linear-gradient(to right, #f7b733, #fc4a1a);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+  </style>
 </head>
 <body>
+  <div class="countdown-container">
     <h1>New Year Countdown</h1>
-    <div class="countdown" id="countdown"></div>
+    <div id="countdown">
+      <div><span id="days"></span> Days</div>
+      <div><span id="hours"></span> Hours</div>
+      <div><span id="minutes"></span> Minutes</div>
+      <div><span id="seconds"></span> Seconds</div>
+    </div>
+  </div>
+  <script>
+    const countdown = () => {
+      const countDate = new Date("Jan 1, 2025 00:00:00").getTime();
+      const now = new Date().getTime();
+      const gap = countDate - now;
 
-    <script>
-        function updateCountdown() {
-            const targetDate = new Date("Jan 1, 2025 00:00:00").getTime();
-            const now = new Date().getTime();
-            const difference = targetDate - now;
+      const second = 1000;
+      const minute = second * 60;
+      const hour = minute * 60;
+      const day = hour * 24;
 
-            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+      const days = Math.floor(gap / day);
+      const hours = Math.floor((gap % day) / hour);
+      const minutes = Math.floor((gap % hour) / minute);
+      const seconds = Math.floor((gap % minute) / second);
 
-            document.getElementById("countdown").innerHTML = 
-                `${days}d ${hours}h ${minutes}m ${seconds}s`;
+      document.getElementById('days').innerText = days;
+      document.getElementById('hours').innerText = hours;
+      document.getElementById('minutes').innerText = minutes;
+      document.getElementById('seconds').innerText = seconds;
+    };
 
-            if (difference < 0) {
-                document.getElementById("countdown").innerHTML = "Happy New Year!";
-            }
-        }
-        setInterval(updateCountdown, 1000);
-    </script>
+    setInterval(countdown, 1000);
+  </script>
 </body>
 </html>
