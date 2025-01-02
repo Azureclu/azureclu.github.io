@@ -3,16 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dragon Boss Tutorial Countdown</title>
+  <title>New Year Countdown</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       display: flex;
       justify-content: center;
       align-items: center;
+      flex-direction: column;
       height: 100vh;
       margin: 0;
-      background: linear-gradient(to right, #FFC300, #FF5733);
+      background: linear-gradient(to right, #fc4a1a, #f7b733);
       color: #fff;
     }
 
@@ -33,16 +34,59 @@
     #countdown span {
       font-size: 48px;
       font-weight: bold;
-      background: linear-gradient(to right, 
-#FFFFFF, #FFFFFF);
+      background: linear-gradient(to right, #ffffff, #ffffff);
       -webkit-background-clip: text;
       color: transparent;
+    }
+
+    .chat-container {
+      width: 90%;
+      max-width: 600px;
+      margin-top: 20px;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 20px;
+      border-radius: 10px;
+      overflow-y: auto;
+      max-height: 300px;
+    }
+
+    .chat-messages {
+      list-style: none;
+      padding: 0;
+    }
+
+    .chat-messages li {
+      margin-bottom: 10px;
+      color: #fff;
+    }
+
+    .chat-form {
+      display: flex;
+      margin-top: 10px;
+      flex-direction: column;
+    }
+
+    .chat-form input {
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+
+    .chat-form button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      background-color: #f7b733;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
   <div class="countdown-container">
-    <h1>New Azure2nd Video Countdown</h1>
+    <h1>Dragon Boss Countdown</h1>
     <div id="countdown">
       <div><span id="days"></span> Days</div>
       <div><span id="hours"></span> Hours</div>
@@ -50,7 +94,16 @@
       <div><span id="seconds"></span> Seconds</div>
     </div>
   </div>
+  <div class="chat-container">
+    <ul class="chat-messages" id="chat-messages"></ul>
+    <form class="chat-form" id="chat-form">
+      <input type="text" id="username-input" placeholder="Enter your username" required>
+      <input type="text" id="chat-input" placeholder="Type your message..." required>
+      <button type="submit">Send</button>
+    </form>
+  </div>
   <script>
+    // Countdown JavaScript
     const countdown = () => {
       const countDate = new Date("Jan 29, 2025 18:00:00").getTime();
       const now = new Date().getTime();
@@ -73,6 +126,29 @@
     };
 
     setInterval(countdown, 1000);
+
+    // Live Chat JavaScript
+    const chatForm = document.getElementById('chat-form');
+    const usernameInput = document.getElementById('username-input');
+    const chatInput = document.getElementById('chat-input');
+    const chatMessages = document.getElementById('chat-messages');
+
+    chatForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const username = usernameInput.value;
+      const message = chatInput.value;
+      if (username.trim() && message.trim()) {
+        addMessage(username, message);
+        chatInput.value = '';
+      }
+    });
+
+    const addMessage = (username, message) => {
+      const li = document.createElement('li');
+      li.innerHTML = `<strong>${username}:</strong> ${message}`;
+      chatMessages.appendChild(li);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    };
   </script>
 </body>
 </html>
