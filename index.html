@@ -46,13 +46,16 @@
       background: rgba(0, 0, 0, 0.5);
       padding: 20px;
       border-radius: 10px;
-      overflow-y: auto;
-      max-height: 300px;
+      display: flex;
+      flex-direction: column;
+      max-height: 400px;
     }
 
     .chat-messages {
       list-style: none;
       padding: 0;
+      overflow-y: auto;
+      flex-grow: 1;
     }
 
     .chat-messages li {
@@ -62,11 +65,11 @@
 
     .chat-form {
       display: flex;
-      margin-top: 10px;
       flex-direction: column;
+      margin-top: 10px;
     }
 
-    .chat-form input {
+    .chat-form input[type="text"] {
       padding: 10px;
       border: none;
       border-radius: 5px;
@@ -86,7 +89,7 @@
 </head>
 <body>
   <div class="countdown-container">
-    <h1>Dragon Boss Countdown</h1>
+    <h1>New Year Countdown</h1>
     <div id="countdown">
       <div><span id="days"></span> Days</div>
       <div><span id="hours"></span> Hours</div>
